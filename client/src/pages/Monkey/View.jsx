@@ -1,6 +1,6 @@
 
 
-export default function View() {
+export function View() {
     return (
       <>
           <h1>View Monkey</h1>
