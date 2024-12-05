@@ -1,20 +1,20 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { getMonkey, deleteMonkey } from "../../models/monkey"
+import { getVaclav, deleteVaclav } from "../../models/vaclav"
 import { useState, useEffect } from "react";
 
 export function View() {
   const { id } = useParams();
-  const [monkey, setMonkey] = useState();
+  const [vaclav, setVaclav] = useState();
   const [isLoaded, setLoaded] = useState(false);
   const [info, setInfo] = useState();
   const [formData, setFormData] = useState();
   const navigate = useNavigate();
 
   const load = async () => {
-    const data = await getMonkey(id);
+    const data = await getVaclav(id);
     if (data.status === 500 || data.status === 404) return setLoaded(null);
     if (data.status === 200) {
-      setMonkey(data.payload);
+      setVaclav(data.payload);
       setLoaded(true);
     }
   }
@@ -29,8 +29,8 @@ export function View() {
 
   const handleButton = async (e) => {
     e.preventDefault();
-    if (monkey.name === formData) {
-      const data = await deleteMonkey(id);
+    if (vaclav.name === formData) {
+      const data = await deleteVaclav(id);
       if (data.status === 200) return navigate("/");
       return setInfo(data.message);
     }
@@ -40,7 +40,7 @@ export function View() {
   if (isLoaded === null) {
     return (
       <>
-        <p>Monkey nuh uh</p>
+        <p>Vaclav nuh uh</p>
       </>
     )
   }
@@ -48,29 +48,29 @@ export function View() {
   if (isLoaded === false) {
     return (
       <>
-        <p>Monkey on the way...</p>
+        <p>Vaclav on the way...</p>
       </>
     )
   }
 
   return (
       <>
-          <h1>Monkey</h1>
+          <h1>Vaclav</h1>
           <p>{id}</p>
-          <p>{monkey.name}</p>
-          <p>{monkey.race}</p>
-          <p>{monkey.gender}</p>
+          <p>Name: {vaclav.name}</p>
+          <p>wifi zasuvky: {vaclav.wifiZasuvky}</p>
+          <p>koleno offset: {vaclav.kolenoOffset}</p>
           <form>
-            <input type="text" placeholder="Enter monkey name" onChange={handleInput} />
-            <button onClick={handleButton}>Delete monkey</button>
+            <input type="text" placeholder="Enter vaclav name" onChange={handleInput} />
+            <button onClick={handleButton}>Delete vaclav</button>
             <p>{info}</p>
           </form>
-          <Link to={`/update-monkey/${id}`}>
+          <Link to={`/update-vaclav/${id}`}>
             <button>
-              Update monkey
+              Update vaclav
             </button>
           </Link>
-          <Link to={"/view-all-monkey"}>
+          <Link to={"/view-all-vaclav"}>
             <button>Back</button>
           </Link>
           <Link to={"/"}>

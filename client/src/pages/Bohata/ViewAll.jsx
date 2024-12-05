@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { getAllMonkey } from "../../models/monkey"
+import { getAllBohata } from "../../models/bohata"
 import ListLink from "./ListLink";
 
 export function ViewAll() {
-  const [monkeys, setMonkeys] = useState();
+  const [bohatas, setBohatas] = useState();
   const [isLoaded, setLoaded] = useState(false);
 
   const load = async () => {
-    const res = await getAllMonkey();
+    const res = await getAllBohata();
     if (res.status === 500 || res.status === 404) return setLoaded(null);
     if (res.status === 200) {
-      setMonkeys(res.payload);
+      setBohatas(res.payload);
       setLoaded(true);
     }
   }
@@ -23,7 +23,7 @@ export function ViewAll() {
   if (isLoaded === null) {
     return (
       <>
-        <p>Monkeys nuh uh</p>
+        <p>Bohatas nuh uh</p>
       </>
     )
   }
@@ -31,7 +31,7 @@ export function ViewAll() {
   if (!isLoaded){
     return (
       <>
-        <p>Monkeys on the way</p>
+        <p>Bohatas on the way</p>
       </>
     )
   }
@@ -39,17 +39,17 @@ export function ViewAll() {
   if (!isLoaded){
     return (
       <>
-        <p>Monkeys loading...</p>
+        <p>Bohatas loading...</p>
       </>
     )
   }
 
   return (
     <>
-        <h1>Monkey list</h1>
+        <h1>Bohata list</h1>
         {
-          monkeys.map((monkey, index) => (
-            <ListLink key={index} {...monkey} />
+          bohatas.map((bohata, index) => (
+            <ListLink key={index} {...bohata} />
           ))
         }
 

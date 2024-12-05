@@ -19,6 +19,8 @@ const athleteRouter = require('./routes/athlete');
 const historicalEventRouter = require('./routes/historical-event');
 const environmentRouter = require('./routes/environment');
 const monkeyRouter = require('./routes/monkey');
+const gameRouter = require('./routes/game');
+const vaclavRouter = require('./routes/vaclav');
 
 const app = express();
 app.use(cors());
@@ -42,6 +44,8 @@ app.use('/athlete', athleteRouter);
 app.use('/historical-event', historicalEventRouter);
 app.use('/environment', environmentRouter);
 app.use('/monkey', monkeyRouter);
+app.use('/game', gameRouter);
+app.use('/vaclav', vaclavRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

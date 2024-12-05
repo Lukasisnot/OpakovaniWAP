@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { getAllMonkey } from "../../models/monkey"
+import { getAllVaclav } from "../../models/vaclav"
 import ListLink from "./ListLink";
 
 export function ViewAll() {
-  const [monkeys, setMonkeys] = useState();
+  const [vaclavs, setVaclavs] = useState();
   const [isLoaded, setLoaded] = useState(false);
 
   const load = async () => {
-    const res = await getAllMonkey();
+    const res = await getAllVaclav();
     if (res.status === 500 || res.status === 404) return setLoaded(null);
     if (res.status === 200) {
-      setMonkeys(res.payload);
+      setVaclavs(res.payload);
       setLoaded(true);
     }
   }
@@ -23,7 +23,7 @@ export function ViewAll() {
   if (isLoaded === null) {
     return (
       <>
-        <p>Monkeys nuh uh</p>
+        <p>Vaclavs nuh uh</p>
       </>
     )
   }
@@ -31,7 +31,7 @@ export function ViewAll() {
   if (!isLoaded){
     return (
       <>
-        <p>Monkeys on the way</p>
+        <p>Vaclavs on the way</p>
       </>
     )
   }
@@ -39,17 +39,17 @@ export function ViewAll() {
   if (!isLoaded){
     return (
       <>
-        <p>Monkeys loading...</p>
+        <p>Vaclavs loading...</p>
       </>
     )
   }
 
   return (
     <>
-        <h1>Monkey list</h1>
+        <h1>Vaclav list</h1>
         {
-          monkeys.map((monkey, index) => (
-            <ListLink key={index} {...monkey} />
+          vaclavs.map((vaclav, index) => (
+            <ListLink key={index} {...vaclav} />
           ))
         }
 

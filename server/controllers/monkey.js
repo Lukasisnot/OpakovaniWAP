@@ -72,7 +72,7 @@ exports.updateMonkey = async (req, res, next) => {
 
 exports.deleteMonkey = async (req, res, next) => {
     try {
-        const result = await Monkey.findByIdAndDelete(req.body.id);
+        const result = await Monkey.findByIdAndDelete(req.params.id);
         if (result) {
             return res.status(200).send({
                 message: "monkey deleted!",

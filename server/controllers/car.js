@@ -40,7 +40,7 @@ exports.makeCar = async (req, res, next) => {
         });
         const result = await data.save();
         if (result) {
-            return res.status(200).send({
+            return res.status(201).send({
                 message: "Car created!",
                 payload: result,
             });
@@ -74,7 +74,7 @@ exports.updateCar = async (req, res, next) => {
 
 exports.deleteCar = async (req, res, next) => {
     try {
-        const result = await Car.findByIdAndDelete(req.body.id);
+        const result = await Car.findByIdAndDelete(req.params.id);
         if (result) {
             return res.status(200).send({
                 message: "Car deleted!",

@@ -34,11 +34,12 @@ exports.makeRichMan = async (req, res, next) => {
     try {
         const data = new RichMan({
             name: req.body.name,
-            salary: req.body.salary
+            salary: req.body.salary,
+            knee: req.body.knee
         });
         const result = await data.save();
         if (result) {
-            return res.status(200).send({
+            return res.status(201).send({
                 message: "Rich man created!",
                 payload: result,
             });
@@ -53,7 +54,8 @@ exports.updateRichMan = async (req, res, next) => {
     try {
         const data = {
             name: req.body.name,
-            salary: req.body.salary
+            salary: req.body.salary,
+            knee: req.body.knee
         };
         const result = await RichMan.findByIdAndUpdate(req.params.id, data);
         if (result) {
@@ -70,7 +72,7 @@ exports.updateRichMan = async (req, res, next) => {
 
 exports.deleteRichMan = async (req, res, next) => {
     try {
-        const result = await RichMan.findByIdAndDelete(req.body.id);
+        const result = await RichMan.findByIdAndDelete(req.params.id);
         if (result) {
             return res.status(200).send({
                 message: "Rich man deleted!",

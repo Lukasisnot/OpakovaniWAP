@@ -39,7 +39,7 @@ exports.makeAthlete = async (req, res, next) => {
         });
         const result = await data.save();
         if (result) {
-            return res.status(200).send({
+            return res.status(201).send({
                 message: "Athlete created!",
                 payload: result,
             });
@@ -72,7 +72,7 @@ exports.updateAthlete = async (req, res, next) => {
 
 exports.deleteAthlete = async (req, res, next) => {
     try {
-        const result = await Athlete.findByIdAndDelete(req.body.id);
+        const result = await Athlete.findByIdAndDelete(req.params.id);
         if (result) {
             return res.status(200).send({
                 message: "Athlete deleted!",

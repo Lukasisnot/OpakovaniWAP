@@ -1,10 +1,10 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { updateMonkey, getMonkey } from "../../models/monkey";
+import { updateVaclav, getVaclav } from "../../models/vaclav";
 
 export function UpdateForm() {
   const { id } = useParams();
-  const [monkey, setMonkey] = useState();
+  const [vaclav, setVaclav] = useState();
   const [isLoaded, setLoaded] = useState(false);
 
   const [formData, setFormData] = useState();
@@ -12,10 +12,10 @@ export function UpdateForm() {
   const navigate = useNavigate();
 
   const load = async () => {
-    const data = await getMonkey(id);
+    const data = await getVaclav(id);
     if (data.status === 500 || data.status === 404) return setLoaded(null);
     if (data.status === 200) {
-      setMonkey(data.payload);
+      setVaclav(data.payload);
       setLoaded(true);
     }
   }
@@ -25,9 +25,9 @@ export function UpdateForm() {
   }, []);
 
   const sendData = async () => {
-    const res = await updateMonkey(id, formData);
+    const res = await updateVaclav(id, formData);
     if (res.status === 200)
-      return navigate(`/view-monkey/${res.payload._id}`);
+      return navigate(`/view-vaclav/${res.payload._id}`);
     setInfo(res.message);
   };
 
@@ -43,7 +43,7 @@ export function UpdateForm() {
   if (isLoaded === null) {
     return (
       <>
-        <p>Monkey nuh uh</p>
+        <p>Vaclav nuh uh</p>
       </>
     )
   }
@@ -51,14 +51,14 @@ export function UpdateForm() {
   if (isLoaded === false) {
     return (
       <>
-        <p>Monkey on the way...</p>
+        <p>Vaclav on the way...</p>
       </>
     )
   }
 
   return (
     <>
-      <h1>Update Monkey</h1>
+      <h1>Update Vaclav</h1>
       <form action="">
         <input
           type="text"
@@ -66,26 +66,26 @@ export function UpdateForm() {
           placeholder="Enter name"
           required
           onChange={handleInput}
-          defaultValue={monkey.name}
-          />
+          defaultValue={vaclav.name}
+        />
         <input
           type="text"
-          name="race"
-          placeholder="Enter race"
+          name="wifiZasuvky"
+          placeholder="Enter number of wifi zasuvky"
           required
           onChange={handleInput}
-          defaultValue={monkey.race}
-          />
+          defaultValue={vaclav.wifiZasuvky}
+        />
         <input
-          type="text"
-          name="gender"
-          placeholder="Enter gender"
+          type="number"
+          name="kolenoOffset"
+          placeholder="Enter koleno offset"
           required
           onChange={handleInput}
-          defaultValue={monkey.gender}
+          defaultValue={vaclav.kolenoOffset}
         />
         <button onClick={handleButton}>
-          Update monkey
+          Update vaclav
         </button>
       </form>
       <p>{info}</p>

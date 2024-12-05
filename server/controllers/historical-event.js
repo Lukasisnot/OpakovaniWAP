@@ -39,7 +39,7 @@ exports.makeHistoricalEvent = async (req, res, next) => {
         });
         const result = await data.save();
         if (result) {
-            return res.status(200).send({
+            return res.status(201).send({
                 message: "historicalEvent created!",
                 payload: result,
             });
@@ -72,7 +72,7 @@ exports.updateHistoricalEvent = async (req, res, next) => {
 
 exports.deleteHistoricalEvent = async (req, res, next) => {
     try {
-        const result = await HistoricalEvent.findByIdAndDelete(req.body.id);
+        const result = await HistoricalEvent.findByIdAndDelete(req.params.id);
         if (result) {
             return res.status(200).send({
                 message: "historicalEvent deleted!",

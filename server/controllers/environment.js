@@ -70,7 +70,7 @@ exports.updateEnvironment = async (req, res, next) => {
 
 exports.deleteEnvironment = async (req, res, next) => {
     try {
-        const result = await Environment.findByIdAndDelete(req.body.id);
+        const result = await Environment.findByIdAndDelete(req.params.id);
         if (result) {
             return res.status(200).send({
                 message: "Environment deleted!",
